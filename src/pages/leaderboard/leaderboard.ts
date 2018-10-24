@@ -49,7 +49,11 @@ export class LeaderboardPage {
           time: new Date()
         })
 
-        console.log(res);
+        /*console.log(res);*/
+
+        if (this.scoreList.length > 10) {
+          this.scoreList = this.scoreList.slice(1,10)
+        }
 
         this.scoreList = res.sort(function(a, b) {
           if(a.score > b.score) {
@@ -59,7 +63,7 @@ export class LeaderboardPage {
           }
         })
 
-
+        this.storage.set('leaderboard', JSON.stringify(res));
       })
     })
   }
